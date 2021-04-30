@@ -8,7 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 public abstract class Service1BaseCacheService extends BaseLoaderService {
 
-    @Resource(name = "Service1RedisTemplate")
+    @Resource(name = "service1RedisTemplate")
     private RedisTemplate<String, Object> template;
 
     @Override
