@@ -11,6 +11,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.yang.jupiter.core.interceptor.AuthInterceptor;
 import com.yang.jupiter.core.masking.MaskAuthInterceptor;
 import com.yang.jupiter.core.masking.MaskAuthStore;
 import com.yang.jupiter.core.masking.MaskFilter;
@@ -31,8 +32,12 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
+		// url 차단 Interceptor 추가
+		registry.addInterceptor(new AuthInterceptor());
+		
 		// masking Interceptor 추가
 		registry.addInterceptor(new MaskAuthInterceptor());
+		
 	}
 
 	/**
