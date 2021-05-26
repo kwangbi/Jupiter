@@ -1,10 +1,13 @@
 package com.yang.jupiter.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.yang.jupiter.dto.ListTableDTO;
 import com.yang.jupiter.entity.AccountDto;
+import com.yang.jupiter.mapper.ListTableMapper;
 import com.yang.jupiter.repository.AccountRepository;
 
 import lombok.AllArgsConstructor;
@@ -16,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AccountService {
 	
 	private final AccountRepository accountRepository;
+	private final ListTableMapper mapper;
 	
 	public String getAccount() {
 		
@@ -32,6 +36,20 @@ public class AccountService {
 		
 		
 		return "ok";
+	}
+	
+	public String getCacheTestService() {
+		
+		log.debug("here");
+		
+		return "ok";
+	}
+	
+	public List<ListTableDTO> getListTable(){
+		
+		List<ListTableDTO> list = mapper.selectListTable();
+		
+		return list;
 	}
 
 }

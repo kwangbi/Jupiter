@@ -1,13 +1,18 @@
 package com.yang.jupiter.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yang.jupiter.dto.ListTableDTO;
 import com.yang.jupiter.dto.TestDTO;
 import com.yang.jupiter.service.AccountService;
 
@@ -62,4 +67,20 @@ public class AccountController {
 		return "ok";
 	}
 
+	@Cacheable(value = "post-single",key = "#id",unless = "#result == null")
+	@GetMapping("/cacheTest/{id}")
+	public String getCacheTest(@PathVariable String id) {
+		log.debug("id {}",id);
+		
+		return accountService.getCacheTestService();
+	}
+	
+	@Cacheable(value = "getListTableData",key = "1" ,unless = "#result == null")
+	@GetMapping("/cacheList")
+	public List<ListTableDTO> getListTableData(){
+		
+		log.debug("1111111");
+		
+		return accountService.getListTable();
+	}
 }

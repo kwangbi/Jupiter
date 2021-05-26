@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.jupiter.mapper.ListTableMapper">
+
+	<select id="selectListTable" resultType="com.yang.jupiter.dto.ListTableDTO" parameterType="com.yang.jupiter.dto.ListTableDTO">
+		SELECT IDX,
+		       VALUE1,
+		       VALUE2
+		FROM LISTTABLE
+	</select>
+
+  </mapper>
