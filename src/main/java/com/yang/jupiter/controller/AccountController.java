@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yang.jupiter.dto.ListTableDTO;
@@ -67,12 +68,12 @@ public class AccountController {
 		return "ok";
 	}
 
-	@Cacheable(value = "post-single",key = "#id",unless = "#result == null")
+	//@Cacheable(value = "post-single",key = "#id",unless = "#result == null")
 	@GetMapping("/cacheTest/{id}")
-	public String getCacheTest(@PathVariable String id) {
+	public String getCacheTest(@PathVariable String id,@RequestParam String codeValue) {
 		log.debug("id {}",id);
 		
-		return accountService.getCacheTestService();
+		return accountService.getCacheTestService(codeValue);
 	}
 	
 	@Cacheable(value = "getListTableData",key = "1" ,unless = "#result == null")
