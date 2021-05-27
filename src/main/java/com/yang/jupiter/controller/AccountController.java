@@ -83,4 +83,13 @@ public class AccountController {
 		
 		return accountService.getListTable();
 	}
+	
+	@Cacheable(value = "getListTableData", keyGenerator = "customKeyGenerator" ,unless = "#result == null")
+	@GetMapping("/cacheList2")
+	public List<ListTableDTO> getListTableData2(){
+		
+		log.debug("1111111");
+		
+		return accountService.getListTable();
+	}	
 }
