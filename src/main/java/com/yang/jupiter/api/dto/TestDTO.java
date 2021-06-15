@@ -1,4 +1,4 @@
-package com.yang.jupiter.dto;
+package com.yang.jupiter.api.dto;
 
 import javax.ws.rs.FormParam;
 

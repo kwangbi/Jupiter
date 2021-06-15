@@ -14,11 +14,13 @@ public class JasyptConfig {
     public StringEncryptor stringEncryptor() {
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
-        config.setPassword("titan"); //암호화에 사용할 키
+        config.setPassword("jupiter"); //암호화에 사용할 키
         config.setAlgorithm("PBEWithMD5AndDES"); //사용할 알고리즘
         config.setKeyObtentionIterations("1000");
         config.setPoolSize("1");
+        config.setProviderName("SunJCE");
         config.setSaltGeneratorClassName("org.jasypt.salt.RandomSaltGenerator");
+        config.setIvGeneratorClassName("org.jasypt.iv.RandomIvGenerator");
         config.setStringOutputType("base64");
         encryptor.setConfig(config);
         return encryptor;

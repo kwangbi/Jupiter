@@ -1,4 +1,4 @@
-package com.yang.jupiter.service;
+package com.yang.jupiter.api.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yang.jupiter.api.dto.AppVersionDTO;
 import com.yang.jupiter.core.exception.BusinessException;
 import com.yang.jupiter.core.redis.CacheConstants;
 import com.yang.jupiter.core.redis.loader.service.Service1BaseCacheService;
 import com.yang.jupiter.core.redis.util.RedisLoaderUtils;
-import com.yang.jupiter.dto.AppVersionDTO;
 
 import lombok.extern.slf4j.Slf4j;
 

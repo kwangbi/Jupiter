@@ -1,4 +1,4 @@
-package com.yang.jupiter.controller;
+package com.yang.jupiter.api.controller;
 
 import java.util.List;
 
@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yang.jupiter.dto.ListTableDTO;
-import com.yang.jupiter.dto.TestDTO;
-import com.yang.jupiter.service.AccountService;
+import com.yang.jupiter.api.dto.ListTableDTO;
+import com.yang.jupiter.api.dto.TestDTO;
+import com.yang.jupiter.api.service.AccountService;
+import com.yang.jupiter.core.exception.BusinessException;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -40,6 +41,10 @@ public class AccountController {
 	@GetMapping("/account")
 	public String getAccount() {
 		
+		if(1==1) {
+		
+			throw new BusinessException("1111");
+		}
 		
 		return accountService.getAccount();
 	}

@@ -1,4 +1,4 @@
-package com.yang.jupiter.controller;
+package com.yang.jupiter.api.controller;
 
 import java.util.Map;
 
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yang.jupiter.api.service.AppVersionService;
 import com.yang.jupiter.core.redis.CacheConstants.RedisType;
 import com.yang.jupiter.core.redis.util.CacheUtils;
-import com.yang.jupiter.service.AppVersionService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

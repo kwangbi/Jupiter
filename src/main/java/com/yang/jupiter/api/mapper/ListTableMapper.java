@@ -1,10 +1,10 @@
-package com.yang.jupiter.mapper;
+package com.yang.jupiter.api.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.yang.jupiter.dto.ListTableDTO;
+import com.yang.jupiter.api.dto.ListTableDTO;
 
 
 @Mapper

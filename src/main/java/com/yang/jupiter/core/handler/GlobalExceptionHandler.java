@@ -8,13 +8,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.yang.jupiter.core.exception.BusinessException;
-import com.yang.jupiter.core.response.Codes;
-import com.yang.jupiter.core.response.ErrorCode;
-import com.yang.jupiter.core.response.ErrorResponse;
-import com.yang.jupiter.core.response.ResponseBase;
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -26,11 +22,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
+
+import com.yang.jupiter.core.exception.BusinessException;
+import com.yang.jupiter.core.response.Codes;
+import com.yang.jupiter.core.response.ErrorCode;
+import com.yang.jupiter.core.response.ErrorResponse;
+import com.yang.jupiter.core.response.ResponseBase;
+
 import lombok.extern.slf4j.Slf4j;
 
-
-@RestControllerAdvice
 @Slf4j
+@Order(0)
+@RestControllerAdvice("com.yang.jupiter.api.controller")
 public class GlobalExceptionHandler {
 
     /**

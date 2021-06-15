@@ -1,4 +1,4 @@
-package com.yang.jupiter.entity;
+package com.yang.jupiter.api.entity;
 
 import javax.persistence.Id;
 
