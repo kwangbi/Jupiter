@@ -2,14 +2,34 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SCM Admin Error Page</title>
+    <style>
+        table td{
+            vertical-align:top;
+            border:solid 1px #888;
+            padding:10px;
+        }
+    </style>
 </head>
 <body>
-<h1>5xx error!</h1>
-<p th:text="${'timestamp: ' + timestamp}"></p>
-<p th:text="${'path: ' + path}"></p>
-<p th:text="${'status: ' + status}"></p>
-<p th:text="${'timestamp: ' + timestamp}"></p>
-<p th:text="${'error: ' + error}"></p>
+<h1>Opps...5xx error!</h1>
+<table>
+    <tr>
+        <td>timestamp</td>
+        <td th:text="${timestamp}"/>
+    </tr>
+    <tr>
+        <td>path</td>
+        <td th:text="${path}"/>
+    </tr>
+    <tr>
+        <td>status</td>
+        <td th:text="${status}"/>
+    </tr>
+    <tr>
+        <td>error</td>
+        <td th:text="${error}"/>
+    </tr>
+</table>
 </body>
 </html>

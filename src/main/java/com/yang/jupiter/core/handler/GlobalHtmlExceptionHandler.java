@@ -1,5 +1,7 @@
 package com.yang.jupiter.core.handler;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.time.LocalDateTime;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,29 +25,24 @@ public class GlobalHtmlExceptionHandler {
 	@ExceptionHandler(NoHandlerFoundException.class)
     public String NoHandlerFoundException(Exception e, Model model, HttpServletRequest request) {
         log.error(e.getMessage(), e);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
         model.addAttribute("timestamp", LocalDateTime.now());
-        model.addAttribute("error", e.getStackTrace());
+        model.addAttribute("error", sw.toString());
         model.addAttribute("path", request.getRequestURI());
         model.addAttribute("message", e.getMessage());
         return "/error/4xx";
     }
-	
-	/*
-	 * @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	 * 
-	 * @ExceptionHandler(RuntimeException.class) public String
-	 * handleRunTimeException(Exception e, Model model, HttpServletRequest request)
-	 * { log.error(e.getMessage(), e); model.addAttribute("timestamp",
-	 * LocalDateTime.now()); model.addAttribute("error", e.getStackTrace());
-	 * model.addAttribute("path", request.getRequestURI());
-	 * model.addAttribute("message", e.getMessage()); return "/error/5xx"; }
-	 */	
+
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
     public String handleException(Exception e, Model model, HttpServletRequest request) {
         log.error(e.getMessage(), e);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
         model.addAttribute("timestamp", LocalDateTime.now());
-        model.addAttribute("error", e.getStackTrace());
+        model.addAttribute("error", sw.toString());
+        model.addAttribute("status", HttpStatus.INTERNAL_SERVER_ERROR);
         model.addAttribute("path", request.getRequestURI());
         model.addAttribute("message", e.getMessage());
         return "/error/5xx";
