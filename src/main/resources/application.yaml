@@ -19,7 +19,14 @@ spring:
       prefix: classpath:templates/
       suffix: .html
       check-template-location: true
-      cache: false 
+      cache: false
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      generate-ddl: true
 
 springdoc:
   version: '@project.version@'
