@@ -16,10 +16,11 @@ public class PostService {
 
     /**
      * 게시글 조회
+     *
      * @param id
      * @return
      */
-    public PostsDto getPost(Long id){
+    public PostsDto getPost(Long id) {
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
         return new PostsDto(entity);
@@ -27,35 +28,49 @@ public class PostService {
 
     /**
      * 게시글 전체 조회
+     *
      * @return
      */
-    public List<Posts> getAllPost(){
+    public List<Posts> getAllPost() {
         return postsRepository.findAll();
     }
 
     /**
      * Posts 저장
+     *
      * @param dto
      * @return
      */
     @Transactional
-    public Long savePosts(PostsDto dto){
+    public Long savePosts(PostsDto dto) {
         return postsRepository.save(dto.toEntity()).getId();
     }
 
     /**
      * 게시글 수정
+     *
      * @param id
      * @param dto
      * @return
      */
     @Transactional
-    public Long updatePosts(Long id,PostsDto dto){
+    public Long updatePosts(Long id, PostsDto dto) {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 파일이 없음.id : " + id));
 
-        posts.update(dto.getTitle(),dto.getContent());
+        posts.update(dto.getTitle(), dto.getContent());
         return id;
+    }
+
+    /**
+     * 게시글 삭제
+     *
+     * @param id
+     */
+    @Transactional
+    public int deletePosts(Long id) {
+        postsRepository.deleteById(id);
+        return 0;
     }
 
 }

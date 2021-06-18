@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import org.springframework.core.annotation.Order;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -139,6 +141,24 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(UnexpectedRollbackException.class)
+    protected ResponseEntity<Object> handleUnexpectedRollbackException(UnexpectedRollbackException e,HttpServletRequest request){
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        // 오류메세지 로그 출력
+        errorWriter(request,e);
+        final String message = "UnexpectedRollbackException";
+        return new ResponseEntity<>(ResponseBase.business(Codes.Response.ERROR.getCode(), message,timestamp.toString()), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    protected ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException e,HttpServletRequest request){
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        // 오류메세지 로그 출력
+        errorWriter(request,e);
+        final String message = "Not exists Data (" + e.getMessage() + ")";
+        return new ResponseEntity<>(ResponseBase.business(Codes.Response.ERROR.getCode(), message,timestamp.toString()), HttpStatus.OK);
+    }
+
     /**
      * BusinessException 처리에 대한 정의
      */
@@ -154,6 +174,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ResponseBase.business(Codes.Response.ERROR.getCode(), message,timestamp.toString()), HttpStatus.OK);
     }
 
+    /**
+     * 기타 오류 처리
+     * @param e
+     * @param request
+     * @return
+     */
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorResponse> handleException(Exception e,HttpServletRequest request) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());

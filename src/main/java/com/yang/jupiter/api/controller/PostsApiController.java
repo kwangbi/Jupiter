@@ -18,42 +18,56 @@ public class PostsApiController {
 
     /**
      * 게시글 등록
+     *
      * @param dto
      * @return
      */
     @PostMapping("/api/posts")
-    public Long save(@RequestBody PostsDto dto){
+    public Long save(@RequestBody PostsDto dto) {
         return postService.savePosts(dto);
     }
 
     /**
      * 게시글 수정
+     *
      * @param id
      * @param dto
      * @return
      */
     @PostMapping("/api/posts/{id}")
-    public Long updatePost(@PathVariable Long id,@RequestBody PostsDto dto){
-        return postService.updatePosts(id,dto);
+    public Long updatePost(@PathVariable Long id, @RequestBody PostsDto dto) {
+        return postService.updatePosts(id, dto);
     }
 
     /**
      * 게시글 조회
+     *
      * @param id
      * @return
      */
     @GetMapping("/api/posts/{id}")
-    public PostsDto getPosts(@PathVariable Long id){
+    public PostsDto getPosts(@PathVariable Long id) {
         return postService.getPost(id);
     }
 
     /**
      * 게시글 전체 조회
+     *
      * @return
      */
     @GetMapping("/api/posts")
-    public List<Posts> getAllPosts(){
+    public List<Posts> getAllPosts() {
         return postService.getAllPost();
+    }
+
+    /**
+     * 게시글 삭제
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/api/posts/{id}")
+    public int deletePosts(@PathVariable Long id) {
+        return postService.deletePosts(id);
     }
 
 }
